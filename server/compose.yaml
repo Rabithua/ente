@@ -7,7 +7,7 @@ services:
       args:
         GIT_COMMIT: development-cluster
     ports:
-      - 8080:8080 # API
+      - 7002:8080 # API
       # - 2112:2112 # Prometheus metrics (uncomment to access externally)
     depends_on:
       postgres:
@@ -30,6 +30,8 @@ services:
 
   postgres:
     image: postgres:15
+    ports:
+      - 5432:5432 # Postgres API
     environment:
       POSTGRES_USER: pguser
       POSTGRES_PASSWORD: pgpass
@@ -46,10 +48,10 @@ services:
     image: minio/minio
     ports:
       - 3200:3200 # MinIO API
-      # - 3201:3201 # MinIO Console (uncomment to access externally)
+      - 3201:3201 # MinIO Console (uncomment to access externally)
     environment:
-      MINIO_ROOT_USER: changeme
-      MINIO_ROOT_PASSWORD: changeme1234
+      MINIO_ROOT_USER: rabithua
+      MINIO_ROOT_PASSWORD: MinIO1230.-+
     command: server /data --address ":3200" --console-address ":3201"
     volumes:
       - minio-data:/data
@@ -58,7 +60,7 @@ services:
           sh -c '
           #!/bin/sh
 
-          while ! mc config host add h0 http://minio:3200 changeme changeme1234 2>/dev/null
+          while ! mc config host add h0 http://minio:3200 rabithua MinIO1230.-+ 2>/dev/null
           do
             echo "Waiting for minio..."
             sleep 0.5
@@ -86,25 +88,29 @@ configs:
       s3:
           are_local_buckets: true
           b2-eu-cen:
-              key: changeme
-              secret: changeme1234
-              endpoint: localhost:3200
+              key: rabithua
+              secret: MinIO1230.-+
+              endpoint: http://192.168.31.123:3200
               region: eu-central-2
               bucket: b2-eu-cen
           wasabi-eu-central-2-v3:
-              key: changeme
-              secret: changeme1234
-              endpoint: localhost:3200
+              key: rabithua
+              secret: MinIO1230.-+
+              endpoint: http://192.168.31.123:3200
               region: eu-central-2
               bucket: wasabi-eu-central-2-v3
               compliance: false
           scw-eu-fr-v3:
-              key: changeme
-              secret: changeme1234
-              endpoint: localhost:3200
+              key: rabithua
+              secret: MinIO1230.-+
+              endpoint: http://192.168.31.123:3200
               region: eu-central-2
               bucket: scw-eu-fr-v3
 
 volumes:
   postgres-data:
+    external: true
+    name: ente_postgres-data
   minio-data:
+    external: true
+    name: ente_minio-data
