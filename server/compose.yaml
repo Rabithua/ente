@@ -90,20 +90,20 @@ configs:
           b2-eu-cen:
               key: rabithua
               secret: MinIO1230.-+
-              endpoint: http://192.168.31.123:3200
+              endpoint: http://192.168.0.123:3200
               region: eu-central-2
               bucket: b2-eu-cen
           wasabi-eu-central-2-v3:
               key: rabithua
               secret: MinIO1230.-+
-              endpoint: http://192.168.31.123:3200
+              endpoint: http://192.168.0.123:3200
               region: eu-central-2
               bucket: wasabi-eu-central-2-v3
               compliance: false
           scw-eu-fr-v3:
               key: rabithua
               secret: MinIO1230.-+
-              endpoint: http://192.168.31.123:3200
+              endpoint: http://192.168.0.123:3200
               region: eu-central-2
               bucket: scw-eu-fr-v3
 
